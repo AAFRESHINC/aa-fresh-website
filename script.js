@@ -147,11 +147,40 @@
     if (!event.target.closest('.site-header') && menu.classList.contains('is-open')) closeMenu();
   });
   const desktop = window.matchMedia('(min-width: 1001px)');
-  desktop.addEventListener('change', closeMenu);
+  const headerActions = document.querySelector('.header-actions');
+
+  function syncNavigationOrder() {
+    const focusedElement = document.activeElement;
+    const focusWasInMenu = menu.contains(focusedElement);
+    // Keep native Tab / Shift+Tab order aligned with each responsive layout.
+    // On phones the menu toggle must come before the links it expands.
+    if (desktop.matches) {
+      if (menu.nextElementSibling !== headerActions) headerActions.before(menu);
+    } else if (headerActions.nextElementSibling !== menu) {
+      headerActions.after(menu);
+    }
+    closeMenu();
+    if (!desktop.matches && focusWasInMenu) {
+      menuButton.focus();
+    } else if (desktop.matches && focusedElement === menuButton) {
+      menu.querySelector('a').focus();
+    } else if (focusWasInMenu) {
+      focusedElement.focus();
+    }
+  }
+
+  desktop.addEventListener('change', syncNavigationOrder);
+  syncNavigationOrder();
 
   function openLinkedAnswer() {
     if (window.location.hash === '#ebt') document.getElementById('ebt').open = true;
   }
   window.addEventListener('hashchange', openLinkedAnswer);
+  window.addEventListener('popstate', () => {
+    const historyLanguage = new URLSearchParams(window.location.search).get('lang');
+    if (Object.hasOwn(translations, historyLanguage)) setLanguage(historyLanguage);
+    // History traversal must not rewrite the URL or the saved preference.
+    openLinkedAnswer();
+  });
   openLinkedAnswer();
 })();
