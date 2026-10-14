@@ -1,0 +1,1209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-orange: #F17F42;
+    --primary-green: #3D7E2F;
+    --light-orange: #FFA66B;
+    --dark-green: #2A5A1F;
+    --accent-gold: #FFB84D;
+    --text-dark: #333;
+    --text-light: #666;
+    --bg-light: #FFF9F5;
+    --bg-white: #FFFFFF;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Chinese text styling with proper alignment */
+.chinese-text {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-weight: 500;
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: 1;
+}
+
+/* English heading styling - appears below Chinese */
+.english-heading {
+    font-size: 0.7em;
+    font-weight: 500;
+    color: var(--text-light);
+    display: block;
+    margin-top: 0.3rem;
+}
+
+/* Ensure mixed English/Chinese text aligns properly */
+h1, h2, h3 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+h1 .chinese-text, h2 .chinese-text, h3 .chinese-text {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    vertical-align: baseline;
+    line-height: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--bg-white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 20px;
+}
+
+.logo {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 80px;
+    width: auto;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.logo-img:hover {
+    opacity: 0.8;
+}
+
+.navbar.scrolled .logo-img {
+    height: 65px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-orange), var(--light-orange));
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-orange);
+    background-color: var(--bg-light);
+}
+
+.nav-links a:hover::after {
+    width: 80%;
+}
+
+.nav-links a.active {
+    color: var(--primary-orange);
+    background-color: var(--bg-light);
+}
+
+.nav-links a.active::after {
+    width: 80%;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(61, 126, 47, 0.85), rgba(42, 90, 31, 0.85), rgba(241, 127, 66, 0.75)), url('hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    padding: 180px 20px 120px;
+    text-align: center;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(2px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-logo {
+    height: 180px;
+    width: auto;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 1s ease;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    animation: fadeInUp 1s ease;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.tagline {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    animation: fadeInUp 1s ease 0.2s;
+    animation-fill-mode: both;
+    font-weight: 500;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+    animation: fadeInUp 1s ease 0.4s;
+    animation-fill-mode: both;
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.hero-announcement-badge {
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease 0.5s;
+    animation-fill-mode: both;
+}
+
+.badge-text {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, var(--accent-gold), var(--light-orange));
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(255, 184, 77, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 35px;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s;
+    animation: fadeInUp 1s ease 0.6s;
+    animation-fill-mode: both;
+    border: 2px solid transparent;
+}
+
+.cta-button.primary {
+    background-color: var(--primary-orange);
+    box-shadow: 0 4px 15px rgba(241, 127, 66, 0.4);
+}
+
+.cta-button.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(241, 127, 66, 0.6);
+    background-color: var(--light-orange);
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    border-color: white;
+    color: white;
+}
+
+.cta-button.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.hero-decoration {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    overflow: hidden;
+}
+
+.decoration-element {
+    position: absolute;
+    bottom: 0;
+    width: 150%;
+    height: 100px;
+    background-color: var(--bg-white);
+    border-radius: 50% 50% 0 0;
+}
+
+/* About Section */
+.about {
+    padding: 100px 20px;
+    background-color: var(--bg-white);
+}
+
+.about h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-green);
+}
+
+.about h2 .chinese-text {
+    color: var(--primary-orange);
+    font-size: 2rem;
+}
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-text p {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    line-height: 1.8;
+    color: var(--text-light);
+}
+
+.about-text p.chinese-text {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    line-height: 2;
+    letter-spacing: 0.02em;
+}
+
+/* Why Choose Section */
+.why-choose {
+    padding: 100px 20px;
+    background-color: var(--bg-light);
+}
+
+.why-choose h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 4rem;
+    color: var(--primary-green);
+}
+
+.why-choose h2 .chinese-text {
+    color: var(--primary-orange);
+    font-size: 2rem;
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.why-card {
+    background-color: var(--bg-white);
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--primary-orange);
+}
+
+.why-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+    border-top-color: var(--primary-green);
+}
+
+.why-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.why-card h3 {
+    color: var(--primary-green);
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.why-card .english-title {
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.why-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: 15px;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.feature-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(241, 127, 66, 0.2);
+    border-color: var(--primary-orange);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-green);
+}
+
+.chinese-subtitle {
+    color: var(--primary-orange);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    display: block;
+    line-height: 1.4;
+}
+
+.feature-item p:last-child {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Products Section */
+.products {
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, var(--bg-white), var(--bg-light));
+}
+
+.products h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-green);
+}
+
+.products h2 .chinese-text {
+    color: var(--primary-orange);
+    font-size: 2rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+}
+
+.product-card {
+    background-color: var(--bg-white);
+    padding: 2.5rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-color: var(--primary-orange);
+}
+
+.product-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.product-card h3 {
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.product-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Specialty Section */
+.specialty-section {
+    padding: 100px 20px;
+    background-color: var(--bg-white);
+}
+
+.specialty-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.specialty-text h2 {
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    margin-bottom: 1.5rem;
+}
+
+.specialty-text h2 .chinese-text {
+    color: var(--primary-orange);
+    font-size: 1.8rem;
+}
+
+.specialty-text p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.specialty-list {
+    list-style: none;
+    padding: 0;
+}
+
+.specialty-list li {
+    font-size: 1.05rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-orange);
+    color: var(--text-dark);
+}
+
+.specialty-image-placeholder {
+    background: linear-gradient(rgba(241, 127, 66, 0.2), rgba(255, 166, 107, 0.3)), url('specialty-section.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    padding: 4rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 10px 30px rgba(241, 127, 66, 0.3);
+    position: relative;
+}
+
+.specialty-image-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(61, 126, 47, 0.7);
+    border-radius: 15px;
+    z-index: 0;
+}
+
+.specialty-image-placeholder p {
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.specialty-subtitle {
+    font-size: 1.1rem !important;
+    margin-top: 0.5rem;
+    opacity: 0.95;
+}
+
+/* Partnership Section */
+.partnership {
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, var(--bg-white), var(--bg-light));
+}
+
+.partnership h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-green);
+}
+
+.partnership h2 .chinese-text {
+    color: var(--primary-orange);
+    font-size: 2rem;
+}
+
+.partnership-intro {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--text-light);
+    margin: 0.5rem auto;
+}
+
+.partnership-intro.chinese-text {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    margin-bottom: 3rem;
+}
+
+.partnership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 3rem auto;
+}
+
+.partnership-card {
+    background-color: var(--bg-white);
+    padding: 2.5rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+}
+
+.partnership-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-color: var(--primary-green);
+}
+
+.partnership-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.partnership-card h3 {
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.partnership-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.partnership-card.highlight {
+    background: linear-gradient(135deg, var(--bg-light), var(--bg-white));
+    border: 2px solid var(--primary-orange);
+    position: relative;
+    overflow: hidden;
+}
+
+.partnership-card.highlight::before {
+    content: 'NOW HIRING';
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background: linear-gradient(135deg, var(--primary-orange), var(--light-orange));
+    color: white;
+    padding: 0.3rem 2.5rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transform: rotate(45deg);
+    letter-spacing: 1px;
+}
+
+.hiring-positions {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 1rem !important;
+    color: var(--text-dark) !important;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.email-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    background-color: var(--primary-green);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.email-link:hover {
+    background-color: var(--dark-green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(61, 126, 47, 0.3);
+}
+
+.partnership-cta {
+    text-align: center;
+    max-width: 800px;
+    margin: 4rem auto 0;
+    padding: 3rem 2rem;
+    background-color: var(--bg-light);
+    border-radius: 15px;
+    border-left: 4px solid var(--primary-orange);
+}
+
+.partnership-cta p {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin: 0.5rem 0 1.5rem;
+    line-height: 1.8;
+}
+
+.partnership-cta p.chinese-text {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    margin-bottom: 2rem;
+}
+
+.partnership-cta .cta-button {
+    background-color: var(--primary-green);
+    margin-top: 1rem;
+}
+
+.partnership-cta .cta-button:hover {
+    background-color: var(--dark-green);
+}
+
+/* Image Showcase Section */
+.image-showcase {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.showcase-image {
+    width: 100%;
+    height: 100%;
+    background: url('fresh-produce.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.showcase-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(61, 126, 47, 0.7), rgba(241, 127, 66, 0.7));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 2rem;
+}
+
+.showcase-overlay h2 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    text-align: center;
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.showcase-overlay h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    text-align: center;
+    font-weight: 500;
+    opacity: 0.95;
+}
+
+.showcase-overlay p {
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+/* Contact Section */
+.contact {
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, var(--bg-light), var(--bg-white));
+}
+
+.contact h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-green);
+}
+
+.contact h2 .chinese-text {
+    color: var(--primary-orange);
+    font-size: 2rem;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 3rem auto 0;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.info-item {
+    padding: 1.5rem 0;
+    border-bottom: 2px solid var(--bg-light);
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item h3 {
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.info-item p {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.map-container {
+    border-radius: 15px;
+    overflow: hidden;
+    min-height: 400px;
+    box-shadow: 0 10px 30px rgba(61, 126, 47, 0.3);
+    background-color: #e0e0e0;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+    color: white;
+    padding: 3rem 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-logo-img {
+    height: 100px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    margin-bottom: 0.5rem;
+}
+
+.footer-info {
+    text-align: right;
+}
+
+.footer-info p {
+    margin: 0.5rem 0;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.footer-info p.chinese-text {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    letter-spacing: 0.02em;
+}
+
+/* Social Media Links */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    background-color: var(--primary-orange);
+    transform: translateY(-3px);
+}
+
+.social-icon.wechat:hover {
+    background-color: #09b83e;
+}
+
+.social-icon.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.social-icon.disabled:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: none;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-orange), var(--light-orange));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(241, 127, 66, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(241, 127, 66, 0.6);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .specialty-content {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 0.5rem;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .hero {
+        padding: 140px 20px 80px;
+        background-attachment: scroll;
+    }
+
+    .hero-logo {
+        height: 80px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .tagline {
+        font-size: 1.1rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .about h2, .products h2, .contact h2 {
+        font-size: 2rem;
+    }
+
+    .about h2 .chinese-text,
+    .products h2 .chinese-text,
+    .contact h2 .chinese-text {
+        font-size: 1.5rem;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .partnership-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .image-showcase {
+        height: 400px;
+    }
+
+    .showcase-image {
+        background-attachment: scroll;
+    }
+
+    .showcase-overlay h2 {
+        font-size: 2rem;
+    }
+
+    .showcase-overlay h3 {
+        font-size: 1.4rem;
+    }
+
+    .showcase-overlay p {
+        font-size: 1.2rem;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.8rem 20px;
+    }
+
+    .logo-img {
+        height: 50px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .hero {
+        padding: 120px 15px 60px;
+        margin-top: 100px;
+    }
+
+    .hero-logo {
+        height: 70px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .cta-button {
+        padding: 15px 35px;
+        font-size: 1rem;
+    }
+
+    .image-showcase {
+        height: 300px;
+    }
+
+    .showcase-overlay h2 {
+        font-size: 1.5rem;
+    }
+
+    .showcase-overlay h3 {
+        font-size: 1.1rem;
+    }
+
+    .showcase-overlay p {
+        font-size: 1rem;
+    }
+
+    .hero-announcement {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .announcement-box {
+        padding: 1.5rem;
+    }
+
+    .announcement-text {
+        font-size: 1rem;
+    }
+
+    .partnership-cta {
+        padding: 2rem 1.5rem;
+    }
+
+    .badge-text {
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .social-links {
+        gap: 0.8rem;
+    }
+
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}
